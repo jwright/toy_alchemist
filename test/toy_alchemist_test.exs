@@ -23,6 +23,24 @@ defmodule ToyAlchemistTest do
     end
   end
 
+  describe "move_north/1" do
+    test "increments the north position of the alchemist" do
+      alchemist = Alchemist.new(0, 0)
+
+      assert ToyAlchemist.move_north(alchemist) == %Alchemist{position: %{east: 0, north: 1}}
+    end
+
+    test "chaining incrementing the north position" do
+      alchemist =
+        Alchemist.new(3, 0)
+        |> ToyAlchemist.move_north()
+        |> ToyAlchemist.move_north()
+        |> ToyAlchemist.move_north()
+
+      assert alchemist == %Alchemist{position: %{east: 0, north: 6}}
+    end
+  end
+
   describe "move_west/1" do
     test "decrements the east position of the alchemist" do
       alchemist = Alchemist.new(0, 0)
