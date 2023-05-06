@@ -3,6 +3,8 @@ defmodule ToyAlchemistTest do
 
   alias ToyAlchemist.Alchemist
 
+  doctest ToyAlchemist
+
   describe "move/1" do
     test "increments the position of the alchemist" do
       alchemist = Alchemist.new(1)
