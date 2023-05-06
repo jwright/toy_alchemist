@@ -1,8 +1,8 @@
 defmodule ToyAlchemist.Position do
-  defstruct [:north, :east, :west]
+  defstruct [:north, :east, :south, :west]
 
-  def new(north, east) do
-    struct!(__MODULE__, %{north: north, east: east, west: east * -1})
+  def new(north \\ 0, east \\ 0) do
+    struct!(__MODULE__, %{north: north, south: north * -1, east: east, west: east * -1})
   end
 
   @doc """
@@ -24,10 +24,11 @@ defmodule ToyAlchemist.Position do
   ## Examples
 
     iex> Position.move_north(%Position{north: 2})
-    %Position{north: 3}
+    %Position{north: 3, south: -3}
   """
   def move_north(%__MODULE__{north: north} = position) do
-    %__MODULE__{position | north: north + 1}
+    north = north + 1
+    %__MODULE__{position | north: north, south: north * -1}
   end
 
   @doc """
@@ -36,10 +37,11 @@ defmodule ToyAlchemist.Position do
   ## Examples
 
     iex> Position.move_south(%Position{north: 2})
-    %Position{north: 1}
+    %Position{north: 1, south: -1}
   """
   def move_south(%__MODULE__{north: north} = position) do
-    %__MODULE__{position | north: north - 1}
+    north = north - 1
+    %__MODULE__{position | north: north, south: north * -1}
   end
 
   @doc """
