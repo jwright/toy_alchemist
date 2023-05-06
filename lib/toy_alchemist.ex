@@ -1,18 +1,19 @@
 defmodule ToyAlchemist do
   @moduledoc """
-  Documentation for `ToyAlchemist`.
+  Performs the commands on the `Alchemist` and keeps track of them on the Elixir Table.
   """
 
+  alias ToyAlchemist.Alchemist
+
   @doc """
-  Hello world.
+  Moves an `Alchemist` one space in the facing direction.
 
   ## Examples
 
-      iex> ToyAlchemist.hello()
-      :world
-
+    iex> ToyAlchemist.move(%Alchemist{position: 1})
+    %Alchemist{position: 2}
   """
-  def hello do
-    :world
+  def move(%Alchemist{position: position} = alchemist) do
+    %Alchemist{alchemist | position: position + 1}
   end
 end
