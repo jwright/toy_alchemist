@@ -1,8 +1,13 @@
 defmodule ToyAlchemistTest do
   use ExUnit.Case
-  doctest ToyAlchemist
 
-  test "greets the world" do
-    assert ToyAlchemist.hello() == :world
+  alias ToyAlchemist.Alchemist
+
+  describe "move/1" do
+    test "increments the position of the alchemist" do
+      alchemist = Alchemist.new(1)
+
+      assert ToyAlchemist.move(alchemist) == %Alchemist{position: 2}
+    end
   end
 end

@@ -3,16 +3,9 @@ defmodule ToyAlchemist do
   Documentation for `ToyAlchemist`.
   """
 
-  @doc """
-  Hello world.
+  alias ToyAlchemist.Alchemist
 
-  ## Examples
-
-      iex> ToyAlchemist.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def move(%Alchemist{position: position} = alchemist) do
+    %Alchemist{alchemist | position: position + 1}
   end
 end
