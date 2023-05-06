@@ -11,5 +11,15 @@ defmodule ToyAlchemistTest do
 
       assert ToyAlchemist.move_east(alchemist) == %Alchemist{position: 2}
     end
+
+    test "chaining incrementing the east position" do
+      alchemist =
+        Alchemist.new(1)
+        |> ToyAlchemist.move_east()
+        |> ToyAlchemist.move_east()
+        |> ToyAlchemist.move_east()
+
+      assert alchemist == %Alchemist{position: 4}
+    end
   end
 end
