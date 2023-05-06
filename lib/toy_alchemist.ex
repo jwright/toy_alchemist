@@ -16,4 +16,16 @@ defmodule ToyAlchemist do
   def move_east(%Alchemist{position: position} = alchemist) do
     %Alchemist{alchemist | position: position + 1}
   end
+
+  @doc """
+  Moves an `Alchemist` one space in the west direction.
+
+  ## Examples
+
+    iex> ToyAlchemist.move_west(%Alchemist{position: 1})
+    %Alchemist{position: 0}
+  """
+  def move_west(%Alchemist{position: position} = alchemist) do
+    %Alchemist{alchemist | position: position - 1}
+  end
 end
