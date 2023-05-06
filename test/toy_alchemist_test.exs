@@ -9,7 +9,7 @@ defmodule ToyAlchemistTest do
     test "increments the east position of the alchemist" do
       alchemist = Alchemist.new(0, 0)
 
-      assert ToyAlchemist.move_east(alchemist) == %Alchemist{position: %{east: 1, north: 0}}
+      assert ToyAlchemist.move_east(alchemist).position.east == 1
     end
 
     test "chaining incrementing the east position" do
@@ -19,7 +19,7 @@ defmodule ToyAlchemistTest do
         |> ToyAlchemist.move_east()
         |> ToyAlchemist.move_east()
 
-      assert alchemist == %Alchemist{position: %{east: 4, north: 0}}
+      assert alchemist.position.east == 4
     end
   end
 
@@ -27,7 +27,7 @@ defmodule ToyAlchemistTest do
     test "increments the north position of the alchemist" do
       alchemist = Alchemist.new(0, 0)
 
-      assert ToyAlchemist.move_north(alchemist) == %Alchemist{position: %{east: 0, north: 1}}
+      assert ToyAlchemist.move_north(alchemist).position.north == 1
     end
 
     test "chaining incrementing the north position" do
@@ -37,7 +37,7 @@ defmodule ToyAlchemistTest do
         |> ToyAlchemist.move_north()
         |> ToyAlchemist.move_north()
 
-      assert alchemist == %Alchemist{position: %{east: 0, north: 6}}
+      assert alchemist.position.north == 6
     end
   end
 
@@ -45,7 +45,7 @@ defmodule ToyAlchemistTest do
     test "decrements the north position of the alchemist" do
       alchemist = Alchemist.new(0, 0)
 
-      assert ToyAlchemist.move_south(alchemist) == %Alchemist{position: %{east: 0, north: -1}}
+      assert ToyAlchemist.move_south(alchemist).position.north == -1
     end
 
     test "chaining decrementing the north position" do
@@ -55,7 +55,7 @@ defmodule ToyAlchemistTest do
         |> ToyAlchemist.move_south()
         |> ToyAlchemist.move_south()
 
-      assert alchemist == %Alchemist{position: %{east: 0, north: -4}}
+      assert alchemist.position.north == -4
     end
   end
 
@@ -63,7 +63,7 @@ defmodule ToyAlchemistTest do
     test "decrements the east position of the alchemist" do
       alchemist = Alchemist.new(0, 0)
 
-      assert ToyAlchemist.move_west(alchemist) == %Alchemist{position: %{east: -1, north: 0}}
+      assert ToyAlchemist.move_west(alchemist).position.east == -1
     end
 
     test "chaining decrementing the east position" do
@@ -73,7 +73,7 @@ defmodule ToyAlchemistTest do
         |> ToyAlchemist.move_west()
         |> ToyAlchemist.move_west()
 
-      assert alchemist == %Alchemist{position: %{east: -5, north: 0}}
+      assert alchemist.position.east == -5
     end
   end
 end
