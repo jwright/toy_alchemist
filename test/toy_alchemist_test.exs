@@ -5,11 +5,11 @@ defmodule ToyAlchemistTest do
 
   doctest ToyAlchemist
 
-  describe "move/1" do
-    test "increments the position of the alchemist" do
+  describe "move_east/1" do
+    test "increments the east position of the alchemist" do
       alchemist = Alchemist.new(1)
 
-      assert ToyAlchemist.move(alchemist) == %Alchemist{position: 2}
+      assert ToyAlchemist.move_east(alchemist) == %Alchemist{position: 2}
     end
   end
 end
