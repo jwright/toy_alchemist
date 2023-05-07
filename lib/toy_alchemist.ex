@@ -3,7 +3,7 @@ defmodule ToyAlchemist do
   Performs the commands on the `Alchemist` and keeps track of them on the Elixir Table.
   """
 
-  alias ToyAlchemist.Alchemist
+  alias ToyAlchemist.{Alchemist, Position}
 
   @doc """
   Moves an `Alchemist` one space in the east direction.
@@ -13,8 +13,8 @@ defmodule ToyAlchemist do
     iex> ToyAlchemist.move_east(%Alchemist{position: %{east: 1}})
     %Alchemist{position: %{east: 2}}
   """
-  def move_east(%Alchemist{position: %{east: east} = position} = alchemist) do
-    %Alchemist{alchemist | position: %{position | east: east + 1}}
+  def move_east(%Alchemist{position: position} = alchemist) do
+    %Alchemist{alchemist | position: Position.move_east(position)}
   end
 
   @doc """
