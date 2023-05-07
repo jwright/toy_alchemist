@@ -1,77 +1,47 @@
 defmodule ToyAlchemistTest do
   use ExUnit.Case
 
-  alias ToyAlchemist.Alchemist
+  alias ToyAlchemist.{Alchemist, Position}
 
-  describe "move_east/1" do
-    test "increments the east position of the alchemist" do
-      alchemist = Alchemist.new(0, 0)
+  describe "move/1" do
+    test "when facining east, increments the east position" do
+      alchemist = Alchemist.new(0, 0, facing: :east) |> ToyAlchemist.move()
 
-      assert ToyAlchemist.move_east(alchemist).position.east == 1
+      assert alchemist.position == %Position{east: 1, west: -1, north: 0, south: 0}
     end
 
-    test "chaining incrementing the east position" do
+    test "when facining north, increments the north position" do
+      alchemist = Alchemist.new(0, 0, facing: :north) |> ToyAlchemist.move()
+
+      assert alchemist.position == %Position{east: 0, west: 0, north: 1, south: -1}
+    end
+
+    test "when facining south, increments the south position" do
+      alchemist = Alchemist.new(0, 0, facing: :south) |> ToyAlchemist.move()
+
+      assert alchemist.position == %Position{east: 0, west: 0, north: -1, south: 1}
+    end
+
+    test "when facining west, increments the west position" do
+      alchemist = Alchemist.new(0, 0, facing: :west) |> ToyAlchemist.move()
+
+      assert alchemist.position == %Position{east: -1, west: 1, north: 0, south: 0}
+    end
+
+    test "when facing a weird direction, it does not change the position" do
+      alchemist = Alchemist.new(1, 2, facing: :diagonal) |> ToyAlchemist.move()
+
+      assert alchemist.position == %Position{east: 2, west: -2, north: 1, south: -1}
+    end
+
+    test "chaining moves" do
       alchemist =
-        Alchemist.new(0, 1)
-        |> ToyAlchemist.move_east()
-        |> ToyAlchemist.move_east()
-        |> ToyAlchemist.move_east()
+        Alchemist.new(0, 1, facing: :east)
+        |> ToyAlchemist.move()
+        |> ToyAlchemist.move()
+        |> ToyAlchemist.move()
 
-      assert alchemist.position.east == 4
-    end
-  end
-
-  describe "move_north/1" do
-    test "increments the north position of the alchemist" do
-      alchemist = Alchemist.new(0, 0)
-
-      assert ToyAlchemist.move_north(alchemist).position.north == 1
-    end
-
-    test "chaining incrementing the north position" do
-      alchemist =
-        Alchemist.new(3, 0)
-        |> ToyAlchemist.move_north()
-        |> ToyAlchemist.move_north()
-        |> ToyAlchemist.move_north()
-
-      assert alchemist.position.north == 6
-    end
-  end
-
-  describe "move_south/1" do
-    test "decrements the north position of the alchemist" do
-      alchemist = Alchemist.new(0, 0)
-
-      assert ToyAlchemist.move_south(alchemist).position.north == -1
-    end
-
-    test "chaining decrementing the north position" do
-      alchemist =
-        Alchemist.new(-1, 0)
-        |> ToyAlchemist.move_south()
-        |> ToyAlchemist.move_south()
-        |> ToyAlchemist.move_south()
-
-      assert alchemist.position.north == -4
-    end
-  end
-
-  describe "move_west/1" do
-    test "decrements the east position of the alchemist" do
-      alchemist = Alchemist.new(0, 0)
-
-      assert ToyAlchemist.move_west(alchemist).position.east == -1
-    end
-
-    test "chaining decrementing the east position" do
-      alchemist =
-        Alchemist.new(0, -2)
-        |> ToyAlchemist.move_west()
-        |> ToyAlchemist.move_west()
-        |> ToyAlchemist.move_west()
-
-      assert alchemist.position.east == -5
+      assert alchemist.position == %Position{east: 4, west: -4, north: 0, south: 0}
     end
   end
 end
