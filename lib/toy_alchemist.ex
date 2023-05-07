@@ -3,18 +3,18 @@ defmodule ToyAlchemist do
   Performs the commands on the `Alchemist` and keeps track of them on the Elixir Table.
   """
 
-  alias ToyAlchemist.Alchemist
+  alias ToyAlchemist.{Alchemist, Position}
 
   @doc """
   Moves an `Alchemist` one space in the east direction.
 
   ## Examples
 
-    iex> ToyAlchemist.move_east(%Alchemist{position: %{east: 1}})
-    %Alchemist{position: %{east: 2}}
+    iex> ToyAlchemist.move_east(%Alchemist{position: %Position{east: 1}})
+    %Alchemist{position: %Position{east: 2}}
   """
-  def move_east(%Alchemist{position: %{east: east} = position} = alchemist) do
-    %Alchemist{alchemist | position: %{position | east: east + 1}}
+  def move_east(%Alchemist{position: position} = alchemist) do
+    %Alchemist{alchemist | position: Position.move_east(position)}
   end
 
   @doc """
@@ -22,11 +22,11 @@ defmodule ToyAlchemist do
 
   ## Examples
 
-    iex> ToyAlchemist.move_north(%Alchemist{position: %{north: 1}})
-    %Alchemist{position: %{north: 2}}
+    iex> ToyAlchemist.move_north(%Alchemist{position: %Position{north: 1}})
+    %Alchemist{position: %Position{north: 2}}
   """
-  def move_north(%Alchemist{position: %{north: north} = position} = alchemist) do
-    %Alchemist{alchemist | position: %{position | north: north + 1}}
+  def move_north(%Alchemist{position: position} = alchemist) do
+    %Alchemist{alchemist | position: Position.move_north(position)}
   end
 
   @doc """
@@ -34,11 +34,11 @@ defmodule ToyAlchemist do
 
   ## Examples
 
-    iex> ToyAlchemist.move_south(%Alchemist{position: %{north: -1}})
-    %Alchemist{position: %{north: -2}}
+    iex> ToyAlchemist.move_south(%Alchemist{position: %Position{north: -1}})
+    %Alchemist{position: %Position{north: -2}}
   """
-  def move_south(%Alchemist{position: %{north: north} = position} = alchemist) do
-    %Alchemist{alchemist | position: %{position | north: north - 1}}
+  def move_south(%Alchemist{position: position} = alchemist) do
+    %Alchemist{alchemist | position: Position.move_south(position)}
   end
 
   @doc """
@@ -46,10 +46,10 @@ defmodule ToyAlchemist do
 
   ## Examples
 
-    iex> ToyAlchemist.move_west(%Alchemist{position: %{east: 1}})
-    %Alchemist{position: %{east: 0}}
+    iex> ToyAlchemist.move_west(%Alchemist{position: %Position{east: 1}})
+    %Alchemist{position: %Position{east: 0}}
   """
-  def move_west(%Alchemist{position: %{east: east} = position} = alchemist) do
-    %Alchemist{alchemist | position: %{position | east: east - 1}}
+  def move_west(%Alchemist{position: position} = alchemist) do
+    %Alchemist{alchemist | position: Position.move_west(position)}
   end
 end
