@@ -1,9 +1,11 @@
 defmodule ToyAlchemist.Alchemist do
-  defstruct [:position]
+  defstruct [:facing, :position]
 
   alias ToyAlchemist.Position
 
-  def new(north \\ 0, east \\ 0) do
-    struct!(__MODULE__, position: Position.new(north, east))
+  def new(north \\ 0, east \\ 0, opts \\ []) do
+    facing = Keyword.get(opts, :facing, :north)
+
+    struct!(__MODULE__, facing: facing, position: Position.new(north, east))
   end
 end
