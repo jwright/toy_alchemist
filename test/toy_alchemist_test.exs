@@ -128,4 +128,28 @@ defmodule ToyAlchemistTest do
       assert alchemist.facing == :north
     end
   end
+
+  describe "chaining movement" do
+    test "ends up in the correct location and facing the correct direction" do
+      alchemist =
+        Alchemist.new(0, 0, facing: :north)
+        |> ToyAlchemist.move()
+        |> ToyAlchemist.turn_right()
+        |> ToyAlchemist.move()
+        |> ToyAlchemist.turn_left()
+        |> ToyAlchemist.move()
+        |> ToyAlchemist.move()
+        |> ToyAlchemist.turn_left()
+        |> ToyAlchemist.move()
+        |> ToyAlchemist.turn_right()
+        |> ToyAlchemist.turn_right()
+        |> ToyAlchemist.move()
+        |> ToyAlchemist.move()
+        |> ToyAlchemist.move()
+
+      assert alchemist.position.north == 3
+      assert alchemist.position.east == 3
+      assert alchemist.facing == :east
+    end
+  end
 end
