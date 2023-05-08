@@ -33,6 +33,16 @@ defmodule ToyAlchemist do
     end
   end
 
+  def turn_right(%Alchemist{facing: facing} = alchemist) do
+    case facing do
+      :north -> %Alchemist{alchemist | facing: :east}
+      :east -> %Alchemist{alchemist | facing: :south}
+      :south -> %Alchemist{alchemist | facing: :west}
+      :west -> %Alchemist{alchemist | facing: :north}
+      _ -> alchemist
+    end
+  end
+
   defp move_east(%Alchemist{position: position} = alchemist) do
     %Alchemist{alchemist | position: Position.move_east(position)}
   end
