@@ -3,6 +3,8 @@ defmodule ToyAlchemist.TableTest do
 
   alias ToyAlchemist.Table
 
+  doctest Table
+
   describe "valid_position?/2" do
     setup do
       [table: Table.new(4, 4)]
