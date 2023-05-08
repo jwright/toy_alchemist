@@ -22,6 +22,9 @@ The `Toy Alchemist` is like the `Toy Robot` but with a special power revealed at
 ### Commands
 
 1. `MOVE` - Moves the `Alchemist` one space in the direction they are facing. It does not perform the move if the Alchemist can fall off of the Elixir Table.
+1. `LEFT` - Turns the `Alchemist` to the left of the direction they are facing.
+1. `RIGHT` - Turns the `Alchemist` to the right of the direction they are facing.
+1. `PLACE` - Places a new `Alchemist` at the specified position and facing the specified direction.
 
 ## TESTING
 
