@@ -1,8 +1,12 @@
 defmodule ToyAlchemist.Table do
+  @moduledoc """
+  Specifies the playing surface.
+  """
+
   defstruct [:north_boundary, :east_boundary]
 
   @doc """
-  Populates a new %Table struct with the specified attributes
+  Populates a new `Table` struct with the specified attributes
 
   ## Examples
 

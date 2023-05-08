@@ -1,6 +1,18 @@
 defmodule ToyAlchemist.Position do
+  @moduledoc """
+  Represents a location for an Alchemist within a Table.
+  """
+
   defstruct [:north, :east, :south, :west]
 
+  @doc """
+  Populates a new `Position` struct with the specified attributes
+
+  ## Examples
+
+    iex> Position.new(3, 4)
+    %Position{north: 3, east: 4, south: -3, west: -4}
+  """
   def new(north \\ 0, east \\ 0) do
     struct!(__MODULE__, %{north: north, south: north * -1, east: east, west: east * -1})
   end
