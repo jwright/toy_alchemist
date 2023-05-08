@@ -23,6 +23,44 @@ defmodule ToyAlchemist do
     end
   end
 
+  @doc """
+  Turns an `Alchemist` one direction to the left and updates the facing direction to
+  the new direction it is using.
+
+  ## Examples
+
+    iex> ToyAlchemist.turn_left(%Alchemist{facing: :east})
+    %Alchemist{facing: :north}
+  """
+  def turn_left(%Alchemist{facing: facing} = alchemist) do
+    case facing do
+      :north -> %Alchemist{alchemist | facing: :west}
+      :east -> %Alchemist{alchemist | facing: :north}
+      :south -> %Alchemist{alchemist | facing: :east}
+      :west -> %Alchemist{alchemist | facing: :south}
+      _ -> alchemist
+    end
+  end
+
+  @doc """
+  Turns an `Alchemist` one direction to the right and updates the facing direction to
+  the new direction it is using.
+
+  ## Examples
+
+    iex> ToyAlchemist.turn_right(%Alchemist{facing: :east})
+    %Alchemist{facing: :south}
+  """
+  def turn_right(%Alchemist{facing: facing} = alchemist) do
+    case facing do
+      :north -> %Alchemist{alchemist | facing: :east}
+      :east -> %Alchemist{alchemist | facing: :south}
+      :south -> %Alchemist{alchemist | facing: :west}
+      :west -> %Alchemist{alchemist | facing: :north}
+      _ -> alchemist
+    end
+  end
+
   defp move_east(%Alchemist{position: position} = alchemist) do
     %Alchemist{alchemist | position: Position.move_east(position)}
   end
