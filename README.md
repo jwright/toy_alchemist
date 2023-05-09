@@ -19,7 +19,7 @@ mix deps.get
 
 The `Toy Alchemist` is like the `Toy Robot` but with a special power revealed at just the right time. The Alchemist is here to help you learn Elixir. It hopes to pass on the potions, er powers.
 
-### Commands
+### Potions
 
 1. `MOVE` - Moves the `Alchemist` one space in the direction they are facing. It does not perform the move if the Alchemist can fall off of the Elixir Table.
 1. `LEFT` - Turns the `Alchemist` to the left of the direction they are facing.
