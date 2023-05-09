@@ -25,5 +25,15 @@ defmodule ToyAlchemist.PotionInterpreterTest do
                {:place, [north: 1, east: 2, facing: :north]}
              ]
     end
+
+    test "with a PLACE potion with invalid arguments, returns an invalid tuple" do
+      potion = "PLACE 8,-,EAST"
+
+      assert PotionInterpreter.interpret([potion]) == [{:invalid, potion}]
+    end
+
+    test "with an invalid potion, returns an invalid tuple" do
+      assert PotionInterpreter.interpret(["BLAH"]) == [{:invalid, "BLAH"}]
+    end
   end
 end
