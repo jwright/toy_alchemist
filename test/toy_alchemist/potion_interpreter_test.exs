@@ -3,6 +3,8 @@ defmodule ToyAlchemist.PotionInterpreterTest do
 
   alias ToyAlchemist.PotionInterpreter
 
+  doctest PotionInterpreter
+
   describe "interpret/1" do
     test "with a MOVE potion, returns a move tuple" do
       assert PotionInterpreter.interpret(["MOVE"]) == [{:move}]

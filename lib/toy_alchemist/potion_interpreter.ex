@@ -1,4 +1,16 @@
 defmodule ToyAlchemist.PotionInterpreter do
+  @moduledoc """
+  Interprets a list of text based potions.
+  """
+
+  @doc """
+  Enumerates through a list of text based potions and converts them into Wizardry instructions.
+
+  ## Examples
+
+    iex> PotionInterpreter.interpret(["PLACE 0,3,SOUTH", "MOVE", "REPORT"])
+    [{:place, [north: 0, east: 3, facing: :south]}, {:move}, {:report}]
+  """
   def interpret(potions), do: potions |> Enum.map(&interpret_potion/1)
 
   defp interpret_potion("LEFT"), do: {:turn_left}
