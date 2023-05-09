@@ -50,6 +50,16 @@ defmodule ToyAlchemist.Simulation do
   end
 
   @doc """
+  Returns the `Alchemist` of the `Simulation` so it can be reported on.
+
+  ## Examples
+
+    iex> Simulation.report(%Simulation{alchemist: %Alchemist{facing: :north}})
+    %Alchemist{facing: :north}
+  """
+  def report(%__MODULE__{alchemist: alchemist}), do: alchemist
+
+  @doc """
   Simulates turning an `Alchemist` on a `Table` to the left of where it is currently facing.
 
   ## Examples

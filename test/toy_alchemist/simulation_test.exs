@@ -68,6 +68,23 @@ defmodule ToyAlchemist.SimulationTest do
     end
   end
 
+  describe "report/1" do
+    setup do
+      table = Table.new(4, 4)
+      placement = Placement.new(0, 0, :north)
+
+      {:ok, simulation} = Simulation.place(table, placement)
+
+      [simulation: simulation]
+    end
+
+    test "an alchemist is returned so it can be reported on",
+         %{simulation: simulation} do
+      assert alchemist = Simulation.report(simulation)
+      assert alchemist == simulation.alchemist
+    end
+  end
+
   describe "turn_left/1" do
     setup do
       table = Table.new(4, 4)
@@ -75,7 +92,7 @@ defmodule ToyAlchemist.SimulationTest do
 
       {:ok, simulation} = Simulation.place(table, placement)
 
-      [simulation: simulation, table: table]
+      [simulation: simulation]
     end
 
     test "a simulation is returned with the alchemist in the updated direction",
@@ -92,7 +109,7 @@ defmodule ToyAlchemist.SimulationTest do
 
       {:ok, simulation} = Simulation.place(table, placement)
 
-      [simulation: simulation, table: table]
+      [simulation: simulation]
     end
 
     test "a simulation is returned with the alchemist in the updated direction",
