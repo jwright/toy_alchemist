@@ -25,6 +25,7 @@ The `Toy Alchemist` is like the `Toy Robot` but with a special power revealed at
 1. `LEFT` - Turns the `Alchemist` to the left of the direction they are facing.
 1. `RIGHT` - Turns the `Alchemist` to the right of the direction they are facing.
 1. `PLACE` - Places a new `Alchemist` at the specified position and facing the specified direction.
+1. `REPORT` - Reports on the position and direction of the `Alchemist`.
 
 ## TESTING
 

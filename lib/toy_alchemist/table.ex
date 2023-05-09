@@ -22,13 +22,12 @@ defmodule ToyAlchemist.Table do
 
   ## Examples
 
-    iex> Table.valid_position?(%Table{east_boundary: 4, north_boundary: 3}, 2, 2)
+    iex> Table.valid_position?(%Table{east_boundary: 4, north_boundary: 3}, %{north: 2, east: 2})
     true
   """
   def valid_position?(
         %__MODULE__{north_boundary: north_boundary, east_boundary: east_boundary},
-        north_position,
-        east_position
+        %{north: north_position, east: east_position}
       ) do
     within_boundary?(north_boundary, north_position) &&
       within_boundary?(east_boundary, east_position)
