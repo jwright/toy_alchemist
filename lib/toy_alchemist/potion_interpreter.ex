@@ -6,7 +6,7 @@ defmodule ToyAlchemist.PotionInterpreter do
 
   defp interpret_potion("PLACE " <> args = potion) do
     case interpret_potion_arguments(:place, args) do
-      [] -> {:invalid, potion}
+      :invalid_arguments -> {:invalid, potion}
       arguments -> {:place, arguments}
     end
   end
@@ -25,7 +25,7 @@ defmodule ToyAlchemist.PotionInterpreter do
     |> parse_potion_arguments(:place)
   end
 
-  defp parse_potion_arguments(nil, _potion), do: []
+  defp parse_potion_arguments(nil, _potion), do: :invalid_arguments
 
   defp parse_potion_arguments(args, :place) do
     [
