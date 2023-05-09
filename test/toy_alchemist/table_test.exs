@@ -11,15 +11,15 @@ defmodule ToyAlchemist.TableTest do
     end
 
     test "returns true when the position is within the table boundaries", %{table: table} do
-      assert Table.valid_position?(table, 2, 3)
+      assert Table.valid_position?(table, %{north: 2, east: 3})
     end
 
     test "returns false when the position is below the boundary", %{table: table} do
-      refute Table.valid_position?(table, 2, -1)
+      refute Table.valid_position?(table, %{north: 2, east: -1})
     end
 
     test "returns false when the position is above the boundary", %{table: table} do
-      refute Table.valid_position?(table, 5, 3)
+      refute Table.valid_position?(table, %{north: 5, east: 3})
     end
   end
 end

@@ -7,6 +7,16 @@ defmodule ToyAlchemist.Simulation do
 
   alias ToyAlchemist.{Alchemist, Placement, Table}
 
+  def move(%__MODULE__{alchemist: alchemist, table: table} = simulation) do
+    moved = alchemist |> Alchemist.move()
+
+    if Table.valid_position?(table, moved.position) do
+      {:ok, %{simulation | alchemist: moved}}
+    else
+      {:error, :out_of_bounds}
+    end
+  end
+
   @doc """
   Simulates placing an `Alchemist` on a `Table` at the specified `Placement`.
 
@@ -16,8 +26,8 @@ defmodule ToyAlchemist.Simulation do
     {:ok, %Simulation{alchemist: %Alchemist{position: %Position{north: 0, east: 2, south: 0, west: -2}, facing: :north},
                       table: %Table{east_boundary: 4, north_boundary: 4}}}
   """
-  def place(%Table{} = table, %Placement{north: north, east: east, facing: facing}) do
-    if Table.valid_position?(table, north, east) do
+  def place(%Table{} = table, %Placement{north: north, east: east, facing: facing} = placement) do
+    if Table.valid_position?(table, placement) do
       alchemist = Alchemist.new(north, east, facing: facing)
 
       {:ok, new(alchemist, table)}
