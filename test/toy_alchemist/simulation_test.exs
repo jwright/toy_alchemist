@@ -67,4 +67,38 @@ defmodule ToyAlchemist.SimulationTest do
       assert {:error, :invalid_placement} = Simulation.place(table, Placement.new(5, 2))
     end
   end
+
+  describe "turn_left/1" do
+    setup do
+      table = Table.new(4, 4)
+      placement = Placement.new(0, 0, :north)
+
+      {:ok, simulation} = Simulation.place(table, placement)
+
+      [simulation: simulation, table: table]
+    end
+
+    test "a simulation is returned with the alchemist in the updated direction",
+         %{simulation: simulation} do
+      assert {:ok, %{alchemist: alchemist}} = Simulation.turn_left(simulation)
+      assert alchemist.facing == :west
+    end
+  end
+
+  describe "turn_right/1" do
+    setup do
+      table = Table.new(4, 4)
+      placement = Placement.new(0, 0, :north)
+
+      {:ok, simulation} = Simulation.place(table, placement)
+
+      [simulation: simulation, table: table]
+    end
+
+    test "a simulation is returned with the alchemist in the updated direction",
+         %{simulation: simulation} do
+      assert {:ok, %{alchemist: alchemist}} = Simulation.turn_right(simulation)
+      assert alchemist.facing == :east
+    end
+  end
 end
