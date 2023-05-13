@@ -30,5 +30,12 @@ defmodule ToyAlchemist.CLITest do
         assert %ToyAlchemist.Simulation{} = CLI.perform(valid_file_path)
       end)
     end
+
+    test "displays an error if the file does not exist" do
+      assert capture_io(fn ->
+               CLI.perform("blah/no-magic-detected.txt")
+             end) ==
+               "Unable to perform wizardly things on `blah/no-magic-detected.txt`. The file was not found.\n"
+    end
   end
 end
