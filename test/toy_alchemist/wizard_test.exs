@@ -31,58 +31,58 @@ defmodule ToyAlchemist.WizardTest do
 
     test "ignores potions until a valid placement" do
       assert %Simulation{alchemist: %{position: %{north: 1, east: 4}, facing: :west}} =
-               Wizard.cast_spell([:move, {:place, [north: 1, east: 4, facing: :west]}])
+               Wizard.cast_spell([{:move}, {:place, [north: 1, east: 4, facing: :west]}])
     end
 
     test "with a move potion returns a simulation with the moved alchemist" do
       assert %Simulation{alchemist: %{position: %{north: 1, east: 3}, facing: :west}} =
-               Wizard.cast_spell([{:place, [north: 1, east: 4, facing: :west]}, :move])
+               Wizard.cast_spell([{:place, [north: 1, east: 4, facing: :west]}, {:move}])
     end
 
     test "ignores any moves above the north boundary" do
       assert %Simulation{alchemist: %{position: %{north: 4, east: 3}, facing: :north}} =
-               Wizard.cast_spell([{:place, [north: 4, east: 3, facing: :north]}, :move])
+               Wizard.cast_spell([{:place, [north: 4, east: 3, facing: :north]}, {:move}])
     end
 
     test "ignores any moves above the east boundary" do
       assert %Simulation{alchemist: %{position: %{north: 2, east: 4}, facing: :east}} =
-               Wizard.cast_spell([{:place, [north: 2, east: 4, facing: :east]}, :move])
+               Wizard.cast_spell([{:place, [north: 2, east: 4, facing: :east]}, {:move}])
     end
 
     test "ignores any moves above the south boundary" do
       assert %Simulation{alchemist: %{position: %{north: 0, east: 1}, facing: :south}} =
-               Wizard.cast_spell([{:place, [north: 0, east: 1, facing: :south]}, :move])
+               Wizard.cast_spell([{:place, [north: 0, east: 1, facing: :south]}, {:move}])
     end
 
     test "ignores any moves above the west boundary" do
       assert %Simulation{alchemist: %{position: %{north: 1, east: 0}, facing: :west}} =
-               Wizard.cast_spell([{:place, [north: 1, east: 0, facing: :west]}, :move])
+               Wizard.cast_spell([{:place, [north: 1, east: 0, facing: :west]}, {:move}])
     end
 
     test "with a turn left potion returns a simulation with the turned alchemist" do
       assert %Simulation{alchemist: %{position: %{north: 1, east: 3}, facing: :west}} =
-               Wizard.cast_spell([{:place, [north: 1, east: 3, facing: :north]}, :turn_left])
+               Wizard.cast_spell([{:place, [north: 1, east: 3, facing: :north]}, {:turn_left}])
     end
 
     test "with a turn right potion returns a simulation with the turned alchemist" do
       assert %Simulation{alchemist: %{position: %{north: 1, east: 3}, facing: :east}} =
-               Wizard.cast_spell([{:place, [north: 1, east: 3, facing: :north]}, :turn_right])
+               Wizard.cast_spell([{:place, [north: 1, east: 3, facing: :north]}, {:turn_right}])
     end
 
     test "with a report potion returns a simulation with the alchemist in the same place" do
       capture_io(fn ->
         assert %Simulation{alchemist: %{position: %{north: 1, east: 3}, facing: :south}} =
-                 Wizard.cast_spell([{:place, [north: 1, east: 3, facing: :south]}, :report])
+                 Wizard.cast_spell([{:place, [north: 1, east: 3, facing: :south]}, {:report}])
       end)
     end
 
     test "with a report potion it reports the alchemist current position" do
       potions = [
         {:place, [north: 1, east: 3, facing: :south]},
-        :turn_left,
-        :move,
-        :report,
-        :turn_right
+        {:turn_left},
+        {:move},
+        {:report},
+        {:turn_right}
       ]
 
       report =
@@ -97,9 +97,9 @@ defmodule ToyAlchemist.WizardTest do
       assert %Simulation{alchemist: %{position: %{north: 1, east: 3}, facing: :north}} =
                Wizard.cast_spell([
                  {:place, [north: 1, east: 3, facing: :north]},
-                 :turn_right,
+                 {:turn_right},
                  {:invalid, :blah},
-                 :turn_left
+                 {:turn_left}
                ])
     end
   end
