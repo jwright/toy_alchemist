@@ -1,6 +1,8 @@
 defmodule ToyAlchemist.CLI do
   alias ToyAlchemist.{Sorcerer, Wizard}
 
+  def perform, do: report_usage()
+
   def perform(potion_file_path) do
     if File.exists?(potion_file_path) do
       File.stream!(potion_file_path)
@@ -23,4 +25,12 @@ defmodule ToyAlchemist.CLI do
 
   defp report_missing_file_path(file_path),
     do: IO.puts("Unable to perform wizardly things on `#{file_path}`. The file was not found.")
+
+  defp report_usage,
+    do:
+      IO.puts("""
+      Usage: alchemist [FILE_PATH]
+
+      Example: alchemist potions.txt
+      """)
 end

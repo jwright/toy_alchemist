@@ -31,6 +31,18 @@ defmodule ToyAlchemist.CLITest do
       end)
     end
 
+    test "with no parameter displays the usage" do
+      assert capture_io(fn ->
+               CLI.perform()
+             end) ==
+               """
+               Usage: alchemist [FILE_PATH]
+
+               Example: alchemist potions.txt
+
+               """
+    end
+
     test "displays an error if the file does not exist" do
       assert capture_io(fn ->
                CLI.perform("blah/no-magic-detected.txt")
