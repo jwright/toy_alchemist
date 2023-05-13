@@ -13,7 +13,7 @@ defmodule ToyAlchemist.Wizard do
 
   ## Examples
 
-    iex> Wizard.cast_spell([{:place, [north: 1, east: 3, facing: :north]}, :move, :turn_left, :move])
+    iex> Wizard.cast_spell([{:place, [north: 1, east: 3, facing: :north]}, {:move}, {:turn_left}, {:move}])
     %Simulation{alchemist: %ToyAlchemist.Alchemist{position: %ToyAlchemist.Position{north: 2, east: 2, south: -2, west: -2}, facing: :west},
                 table: %ToyAlchemist.Table{north_boundary: 4, east_boundary: 4}}
   """
@@ -30,24 +30,24 @@ defmodule ToyAlchemist.Wizard do
   defp cast_spell([{:invalid, _potion} | remaining], simulation),
     do: cast_spell(remaining, simulation)
 
-  defp cast_spell([:move | remaining], simulation) do
+  defp cast_spell([{:move} | remaining], simulation) do
     case Simulation.move(simulation) do
       {:ok, simulation} -> cast_spell(remaining, simulation)
       {:error, :out_of_bounds} -> cast_spell(remaining, simulation)
     end
   end
 
-  defp cast_spell([:report | remaining], simulation) do
+  defp cast_spell([{:report} | remaining], simulation) do
     simulation |> Simulation.report() |> report_on()
     cast_spell(remaining, simulation)
   end
 
-  defp cast_spell([:turn_left | remaining], simulation) do
+  defp cast_spell([{:turn_left} | remaining], simulation) do
     {:ok, simulation} = simulation |> Simulation.turn_left()
     cast_spell(remaining, simulation)
   end
 
-  defp cast_spell([:turn_right | remaining], simulation) do
+  defp cast_spell([{:turn_right} | remaining], simulation) do
     {:ok, simulation} = simulation |> Simulation.turn_right()
     cast_spell(remaining, simulation)
   end
