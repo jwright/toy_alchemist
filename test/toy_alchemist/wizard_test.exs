@@ -5,6 +5,8 @@ defmodule ToyAlchemist.WizardTest do
 
   alias ToyAlchemist.{Simulation, Wizard}
 
+  doctest Wizard
+
   describe "cast_spell/1" do
     test "with a place potion returns a simulation with the alchemist placed" do
       assert %Simulation{alchemist: alchemist} =
