@@ -1,4 +1,4 @@
-defmodule ToyAlchemist.PotionInterpreter do
+defmodule ToyAlchemist.Sorcerer do
   @moduledoc """
   Interprets a list of text based potions.
   """
@@ -8,7 +8,7 @@ defmodule ToyAlchemist.PotionInterpreter do
 
   ## Examples
 
-    iex> PotionInterpreter.interpret(["PLACE 0,3,SOUTH", "MOVE", "REPORT"])
+    iex> Sorcerer.interpret(["PLACE 0,3,SOUTH", "MOVE", "REPORT"])
     [{:place, [north: 0, east: 3, facing: :south]}, {:move}, {:report}]
   """
   def interpret(potions), do: potions |> Enum.map(&interpret_potion/1)
