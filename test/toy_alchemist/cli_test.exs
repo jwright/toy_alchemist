@@ -5,13 +5,25 @@ defmodule ToyAlchemist.CLITest do
 
   alias ToyAlchemist.CLI
 
-  describe "perform/1" do
-    setup do
-      valid_file_path = Path.expand("test/fixtures/potions.txt", File.cwd!())
+  setup_all do
+    valid_file_path = Path.expand("test/fixtures/potions.txt", File.cwd!())
 
-      [valid_file_path: valid_file_path]
+    [valid_file_path: valid_file_path]
+  end
+
+  describe "main/1" do
+    test "parses the file name", %{valid_file_path: valid_file_path} do
+      capture_io(fn ->
+        assert %ToyAlchemist.Simulation{} = CLI.main([valid_file_path])
+      end)
     end
 
+    test "calls usage if the file name cannot be parsed" do
+      assert capture_io(fn -> CLI.main([]) end) == usage_banner()
+    end
+  end
+
+  describe "perform/1" do
     test "with a valid potion file performs the spell", %{valid_file_path: valid_file_path} do
       actual =
         capture_io(fn ->
@@ -32,15 +44,7 @@ defmodule ToyAlchemist.CLITest do
     end
 
     test "with no parameter displays the usage" do
-      assert capture_io(fn ->
-               CLI.perform()
-             end) ==
-               """
-               Usage: alchemist [FILE_PATH]
-
-               Example: alchemist potions.txt
-
-               """
+      assert capture_io(fn -> CLI.perform(nil) end) == usage_banner()
     end
 
     test "displays an error if the file does not exist" do
@@ -50,4 +54,12 @@ defmodule ToyAlchemist.CLITest do
                "Unable to perform wizardly things on `blah/no-magic-detected.txt`. The file was not found.\n"
     end
   end
+
+  defp usage_banner,
+    do: """
+    Usage: alchemist [FILE_PATH]
+
+    Example: alchemist potions.txt
+
+    """
 end

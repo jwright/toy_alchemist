@@ -1,7 +1,13 @@
 defmodule ToyAlchemist.CLI do
   alias ToyAlchemist.{Sorcerer, Wizard}
 
-  def perform, do: report_usage()
+  def main(args) do
+    args
+    |> parse_args
+    |> perform()
+  end
+
+  def perform(nil), do: report_usage()
 
   def perform(potion_file_path) do
     if File.exists?(potion_file_path) do
@@ -11,6 +17,14 @@ defmodule ToyAlchemist.CLI do
     else
       report_missing_file_path(potion_file_path)
     end
+  end
+
+  defp parse_args(args) do
+    {_, arguments, _} =
+      args
+      |> OptionParser.parse(switches: [])
+
+    arguments |> List.first()
   end
 
   defp perform_potions(potions) do
