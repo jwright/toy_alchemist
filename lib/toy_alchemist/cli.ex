@@ -1,6 +1,18 @@
 defmodule ToyAlchemist.CLI do
+  @moduledoc """
+  A command line interface to process a list of potions.
+  """
+
   alias ToyAlchemist.{Sorcerer, Wizard}
 
+  @doc """
+  The main entry point for the `alchemist` script.
+
+  ## Examples
+
+    iex> ToyAlchemist.CLI.main(["potions.txt"])
+    %ToyAlchemist.Simulation{alchemist: ToyAlchemist.Alchemist{}}
+  """
   def main(args) do
     args
     |> parse_args
@@ -9,6 +21,14 @@ defmodule ToyAlchemist.CLI do
 
   def perform(nil), do: report_usage()
 
+  @doc """
+  Processes all of the potions specified in the file at the provided path.
+
+  ## Examples
+
+    iex> ToyAlchemist.CLI.perform("potions.txt")
+    %ToyAlchemist.Simulation{alchemist: ToyAlchemist.Alchemist{}}
+  """
   def perform(potion_file_path) do
     if File.exists?(potion_file_path) do
       File.stream!(potion_file_path)
